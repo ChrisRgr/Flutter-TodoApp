@@ -1,35 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:todo_application/models/todo_model.dart';
 import 'package:todo_application/models/todo.dart';
 
 void main() {
-  runApp(const MyApp(
-    items: List<Todo> = [Todo(id:1,description: '',title: '')],
-  ));
+  runApp(MaterialApp(
+    home: MyApp(items: [Todo(id: 1,title: "Todo 1",description: "Une description"),
+      Todo(id: 2,title: "Todo 2",description: "Une deuxième description"),
+      Todo(id: 1,title: "Todo 3",description: "Une troisième description")]
+      ,),
+  ),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key,required this.items}) : super(key: key);
+  const MyApp({Key? key, required this.items}) : super(key: key);
   final List<Todo> items;
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Todo app Demo',
-      theme: ThemeData(
-
-        primarySwatch: Colors.blue,
+      title: "test",
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text("test"),
+        ),
+        body: ListView.builder(
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(items[index].title),
+              subtitle: Text(items[index].description),
+            );
+          },
+        ),
+        floatingActionButton: FloatingActionButton(
+          tooltip: 'Ajouter une tâche',
+          onPressed: () {
+            Navigator.push(
+              context,
+              // Il est possible d'ajouter des arguments qui seront passés au constructeur
+              MaterialPageRoute(builder: (context) => AddPage()),
+            );
+          },
+          child: const Icon(Icons.add),
+        ),
       ),
-      home: const MyHomePage(title: 'Todo app Demo Home Page'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-
-
   final String title;
 
   @override
@@ -40,13 +61,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _AddTodo() {
     setState(() {
-      ListView.builder(
-          itemCount: data.length, // Nombre d'élément dans votre liste de données (ici data)
-          itemBuilder: (context, i) {
-            // Construction du widget à répéter
-          }
-      );
-
     });
   }
 
@@ -91,6 +105,27 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class AddPage extends StatelessWidget{
+  const AddPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Formulaire d'ajout"),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: const Text('Go back!'),
+        ),
+      ),
     );
   }
 }
