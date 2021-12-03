@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:project1/todo_model/todo.dart';
+import 'package:project1/todo_model/todo_model.dart';
 
 void main() {
   runApp(
-      MaterialApp(
-          home: MyApp(
-            items: [
-              Todo(id: 1, title: "Todo 1", description: "Une description"),
-              Todo(id: 2, title: "Todo 2", description: "Une deuxième description"),
-              Todo(id: 1, title: "Todo 3", description: "Une troisième description")
-            ],
-  ),
-  ),
+    MaterialApp(
+      home: MyApp(
+        items: [
+          Todo(id: 1, title: "Todo 1", description: "Une description"),
+          Todo(id: 2, title: "Todo 2", description: "Une deuxième description"),
+          Todo(id: 1, title: "Todo 3", description: "Une troisième description")
+        ],
+      ),
+    ),
   );
 }
 
@@ -25,8 +26,14 @@ class MyApp extends StatelessWidget {
       title: "Mon app Todo",
       home: Scaffold(
         appBar: AppBar(
-          title: const Text("Ma liste"),
-        ),
+          title: Text('Ma liste'),
+          backgroundColor: Colors.greenAccent[400],
+          leading: IconButton(
+            icon: Icon(Icons.menu),
+            tooltip: 'Menu',
+            onPressed: () {},
+          ), //IcoButton
+        ), //AppBar
         body: ListView.builder(
           itemCount: items.length,
           itemBuilder: (context, index) {
@@ -59,7 +66,13 @@ class AddPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Formulaire d'ajout"),
+        title: Text("Formulaire d'ajout"),
+        backgroundColor: Colors.greenAccent[400],
+        leading: IconButton(
+          icon: Icon(Icons.menu),
+          tooltip: 'Menu',
+          onPressed: () {},
+        ), //IcoButton
       ),
       body: Center(
         child: Column(
@@ -71,6 +84,9 @@ class AddPage extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.red,
+              ),
               child: const Text('Revenir en arrière'),
             ),
           ],
@@ -91,11 +107,6 @@ class AddTaskForm extends StatefulWidget {
 }
 
 class MyCustomFormState extends State<AddTaskForm> {
-  // Create a global key that uniquely identifies the Form widget
-  // and allows validation of the form.
-  //
-  // Note: This is a GlobalKey<FormState>,
-  // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -139,7 +150,6 @@ class MyCustomFormState extends State<AddTaskForm> {
   }
 }
 
-
 class ConfirmPage extends StatelessWidget {
   const ConfirmPage({Key? key}) : super(key: key);
 
@@ -148,6 +158,12 @@ class ConfirmPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Confirmation d'ajout de la tâche"),
+        backgroundColor: Colors.greenAccent[400],
+        leading: IconButton(
+          icon: Icon(Icons.menu),
+          tooltip: 'Menu',
+          onPressed: () {},
+        ), //IcoButton
       ),
       body: Center(
         child: Column(
@@ -159,6 +175,9 @@ class ConfirmPage extends StatelessWidget {
                 //Retour home page
                 Navigator.of(context).popUntil((route) => route.isFirst);
               },
+              style: ElevatedButton.styleFrom(
+                primary: Colors.red,
+              ),
               child: const Text("Revenir à la page d'accueil"),
             ),
           ],
