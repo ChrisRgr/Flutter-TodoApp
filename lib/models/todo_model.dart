@@ -1,7 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:todo_application/models/todo.dart';
+import 'package:todo_application/models//todo.dart';
 
 
 
