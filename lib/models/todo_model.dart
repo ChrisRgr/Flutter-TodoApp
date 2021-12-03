@@ -4,11 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:project1/todo_model/todo.dart';
 
 
-
 class TodoModel extends ChangeNotifier {
   final List<Todo> _todos = [
-  Todo(id: 1, title: "First Todo", description: "My first todo"),
-  Todo(id: 2, title: "Second todo", description: "My second todo")
+    Todo(id: 1, title: "First Todo", description: "My first todo"),
+    Todo(id: 2, title: "Second todo", description: "My second todo")
   ];
 
   UnmodifiableListView<Todo> get todos => UnmodifiableListView(_todos);
@@ -18,7 +17,7 @@ class TodoModel extends ChangeNotifier {
     _todos.add(todo);
     notifyListeners();
   }
-
+  
   void update(int id, String newTitle, String newDescription) {
     var todo = _todos.firstWhere((todo) => todo.id == id);
     todo.title = newTitle;
@@ -26,12 +25,12 @@ class TodoModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void delete(int id){
+  void delete(int id) {
     _todos.removeWhere((todo) => todo.id == id);
     notifyListeners();
   }
 
-  Todo read(int id){
+  Todo read(int id) {
     return _todos.firstWhere((element) => element.id == id);
   }
 
