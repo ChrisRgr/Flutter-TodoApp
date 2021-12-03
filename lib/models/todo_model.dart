@@ -1,7 +1,7 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:todo_application/models//todo.dart';
+import 'package:project1/todo_model/todo.dart';
 
 
 
@@ -10,6 +10,7 @@ class TodoModel extends ChangeNotifier {
   Todo(id: 1, title: "First Todo", description: "My first todo"),
   Todo(id: 2, title: "Second todo", description: "My second todo")
   ];
+
   UnmodifiableListView<Todo> get todos => UnmodifiableListView(_todos);
 
   void add(Todo todo) {
